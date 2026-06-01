@@ -173,7 +173,7 @@ export default function Chat() {
                             {(ci.top_complaints as string[] | undefined)?.length ? (
                               <div><strong>Top Complaints:</strong><ul className="list-disc pl-4 mt-1">{(ci.top_complaints as string[]).map((c, i) => <li key={i}>{c}</li>)}</ul></div>
                             ) : null}
-                            {ci.key_insight && <p className="italic text-slate-500">{String(ci.key_insight)}</p>}
+                            {!!ci.key_insight && <p className="italic text-slate-500">{String(ci.key_insight)}</p>}
                           </div>
                         )
                       })()}
@@ -186,7 +186,7 @@ export default function Chat() {
                         return (
                           <div className="text-xs space-y-1">
                             <p><strong>Trend:</strong> {String(sa.growth_trend)} | <strong>Best Region:</strong> {String(sa.best_region)}</p>
-                            {sa.key_insight && <p className="italic text-slate-500">{String(sa.key_insight)}</p>}
+                            {!!sa.key_insight && <p className="italic text-slate-500">{String(sa.key_insight)}</p>}
                           </div>
                         )
                       })()}

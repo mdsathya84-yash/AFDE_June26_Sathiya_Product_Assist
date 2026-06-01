@@ -88,7 +88,7 @@ export default function Report() {
       {r && !isLoading && (
         <div className="space-y-8">
           {/* Executive Summary */}
-          {r.executive_summary && (
+          {!!r.executive_summary && (
             <section>
               <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-3 flex items-center gap-2">
                 <span className="text-indigo-600">#</span> Executive Summary
@@ -100,7 +100,7 @@ export default function Report() {
           )}
 
           {/* SWOT */}
-          {r.swot && (
+          {!!r.swot && (
             <section>
               <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-3 flex items-center gap-2">
                 <span className="text-indigo-600">#</span> SWOT Analysis
@@ -110,7 +110,7 @@ export default function Report() {
           )}
 
           {/* Feature Priorities */}
-          {r.feature_priorities && (
+          {!!r.feature_priorities && (
             <section>
               <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-3 flex items-center gap-2">
                 <span className="text-indigo-600">#</span> Feature Prioritization
@@ -124,7 +124,7 @@ export default function Report() {
           )}
 
           {/* Opportunities */}
-          {r.opportunities && (
+          {!!r.opportunities && (
             <section>
               <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-3 flex items-center gap-2">
                 <span className="text-indigo-600">#</span> Opportunity Scoring
@@ -138,7 +138,7 @@ export default function Report() {
           )}
 
           {/* Action Plan */}
-          {r.strategy && (
+          {!!r.strategy && (
             <section>
               <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-3 flex items-center gap-2">
                 <span className="text-indigo-600">#</span> Strategic Action Plan
@@ -170,7 +170,7 @@ export default function Report() {
           )}
 
           {/* Product Roadmap */}
-          {r.strategy && (
+          {!!r.strategy && (
             <section>
               <h2 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-3 flex items-center gap-2">
                 <span className="text-indigo-600">#</span> Product Roadmap
