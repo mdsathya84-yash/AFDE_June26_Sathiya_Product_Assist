@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Product Strategy Report</title>
+<style>
+  @page { size: A4; margin: 2cm; @bottom-center { content: "Page " counter(page) " of " counter(pages); font-size: 10px; color: #64748b; } }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Helvetica Neue', Arial, sans-serif; color: #1E293B; font-size: 11px; line-height: 1.6; }
+  h1 { font-size: 28px; color: #6366F1; margin-bottom: 8px; }
+  h2 { font-size: 18px; color: #6366F1; margin: 24px 0 12px; border-bottom: 2px solid #6366F1; padding-bottom: 6px; }
+  h3 { font-size: 13px; color: #334155; margin: 16px 0 8px; font-weight: 700; }
+  p { margin-bottom: 8px; }
+  .cover { text-align: center; padding: 80px 0 60px; page-break-after: always; }
+  .cover .subtitle { font-size: 14px; color: #64748b; margin-top: 8px; }
+  .cover .date { font-size: 12px; color: #94a3b8; margin-top: 16px; }
+  .cover .badge { display: inline-block; background: #6366F1; color: white; padding: 4px 12px; border-radius: 12px; font-size: 10px; margin-top: 20px; }
+  .toc { page-break-after: always; }
+  .toc ul { list-style: none; padding: 0; }
+  .toc li { padding: 4px 0; border-bottom: 1px dotted #e2e8f0; display: flex; justify-content: space-between; }
+  .section { page-break-inside: avoid; margin-bottom: 24px; }
+  .summary-box { background: #f1f5f9; border-left: 4px solid #6366F1; padding: 16px; border-radius: 4px; font-size: 11px; line-height: 1.8; }
+  .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .swot-cell { padding: 12px; border-radius: 6px; }
+  .swot-cell.strengths { background: #dcfce7; border: 1px solid #86efac; }
+  .swot-cell.weaknesses { background: #fee2e2; border: 1px solid #fca5a5; }
+  .swot-cell.opportunities { background: #dbeafe; border: 1px solid #93c5fd; }
+  .swot-cell.threats { background: #fef9c3; border: 1px solid #fde047; }
+  .swot-cell h3 { font-size: 12px; margin-bottom: 6px; }
+  .swot-cell ul { padding-left: 16px; font-size: 10px; }
+  .swot-cell li { margin-bottom: 3px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 10px; }
+  th { background: #6366F1; color: white; padding: 6px 8px; text-align: left; font-size: 10px; }
+  td { padding: 5px 8px; border-bottom: 1px solid #e2e8f0; }
+  tr:nth-child(even) td { background: #f8fafc; }
+  .score-badge { display: inline-block; padding: 2px 6px; border-radius: 10px; font-weight: bold; font-size: 9px; }
+  .score-high { background: #dcfce7; color: #166534; }
+  .score-med { background: #fef9c3; color: #854d0e; }
+  .score-low { background: #fee2e2; color: #991b1b; }
+  .action-row { display: flex; gap: 8px; margin-bottom: 6px; align-items: flex-start; }
+  .action-bullet { flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; background: #6366F1; color: white; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: bold; }
+  .action-content { flex: 1; }
+  .action-content .kpi { font-size: 9px; color: #64748b; margin-top: 2px; }
+  .horizon-label { display: inline-block; background: #6366F1; color: white; padding: 3px 10px; border-radius: 12px; font-size: 10px; margin-bottom: 10px; }
+  .opp-card { border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px; margin-bottom: 8px; display: flex; gap: 10px; align-items: center; }
+  .opp-score { font-size: 18px; font-weight: bold; color: #6366F1; min-width: 40px; text-align: center; }
+  .opp-details { flex: 1; }
+  .opp-details .name { font-weight: 700; font-size: 11px; }
+  .opp-details .meta { font-size: 9px; color: #64748b; margin-top: 2px; }
+  .tag { display: inline-block; padding: 1px 6px; border-radius: 8px; font-size: 9px; margin-left: 4px; }
+  .tag-low { background: #dcfce7; color: #166534; }
+  .tag-med { background: #fef9c3; color: #854d0e; }
+  .tag-high { background: #fee2e2; color: #991b1b; }
+  .footer-notice { font-size: 9px; color: #94a3b8; text-align: center; margin-top: 40px; padding-top: 12px; border-top: 1px solid #e2e8f0; }
+</style>
+</head>
+<body>
+
+<!-- Cover Page -->
+<div class="cover">
+  <div style="font-size:48px; margin-bottom:16px;">📊</div>
+  <h1>Product Strategy Report</h1>
+  <div class="subtitle">AI-Powered Strategic Analysis</div>
+  <div class="date">Generated on {{ generated_date }}</div>
+  <div class="badge">🤖 Powered by Multi-Agent AI</div>
+</div>
+
+<!-- Table of Contents -->
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ul>
+    <li><span>1. Executive Summary</span><span>2</span></li>
+    <li><span>2. Sales Performance Analysis</span><span>3</span></li>
+    <li><span>3. Customer Insights</span><span>4</span></li>
+    <li><span>4. SWOT Analysis</span><span>5</span></li>
+    <li><span>5. Feature Prioritization (RICE)</span><span>6</span></li>
+    <li><span>6. Opportunity Scoring</span><span>7</span></li>
+    <li><span>7. Strategic Action Plan</span><span>8</span></li>
+    <li><span>8. Product Roadmap</span><span>9</span></li>
+  </ul>
+</div>
+
+<!-- Section 1: Executive Summary -->
+<div class="section">
+  <h2>1. Executive Summary</h2>
+  <div class="summary-box">{{ executive_summary }}</div>
+</div>
+
+<!-- Section 2: Sales Performance -->
+<div class="section">
+  <h2>2. Sales Performance Analysis</h2>
+  {% if sales_analysis %}
+  <p><strong>Growth Trend:</strong> {{ sales_analysis.get('growth_trend', 'N/A') | upper }}
+     &nbsp;|&nbsp; <strong>Best Region:</strong> {{ sales_analysis.get('best_region', 'N/A') }}
+     &nbsp;|&nbsp; <strong>Weakest Region:</strong> {{ sales_analysis.get('worst_region', 'N/A') }}
+  </p>
+
+  {% if sales_analysis.get('top_revenue_products') %}
+  <h3>Top Products by Revenue</h3>
+  <table>
+    <tr><th>Product</th><th>Revenue (USD)</th></tr>
+    {% for p in sales_analysis.get('top_revenue_products', []) %}
+    <tr><td>{{ p.product }}</td><td>${{ "{:,.0f}".format(p.revenue) }}</td></tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+  {% if sales_analysis.get('anomalies') %}
+  <h3>Anomalies & Flags</h3>
+  <ul style="padding-left:16px; font-size:10px;">
+    {% for a in sales_analysis.get('anomalies', []) %}<li>{{ a }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+
+  <p style="margin-top:10px;"><em>{{ sales_analysis.get('key_insight', '') }}</em></p>
+  {% endif %}
+</div>
+
+<!-- Section 3: Customer Insights -->
+<div class="section">
+  <h2>3. Customer Insights</h2>
+  {% if customer_insights %}
+  <p><strong>Overall Sentiment:</strong> {{ customer_insights.get('overall_sentiment', 'N/A') | title }}
+     &nbsp;|&nbsp; <strong>NPS Score:</strong> {{ customer_insights.get('nps_score', 0) | round(1) }}
+  </p>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px;">
+    <div>
+      <h3>Top Complaints</h3>
+      <ul style="padding-left:16px; font-size:10px;">
+        {% for c in customer_insights.get('top_complaints', []) %}<li>{{ c }}</li>{% endfor %}
+      </ul>
+    </div>
+    <div>
+      <h3>Top Praise Points</h3>
+      <ul style="padding-left:16px; font-size:10px;">
+        {% for p in customer_insights.get('top_praise_points', []) %}<li>{{ p }}</li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  {% if customer_insights.get('at_risk_products') %}
+  <h3>At-Risk Products</h3>
+  <table>
+    <tr><th>Product</th><th>Reason</th></tr>
+    {% for r in customer_insights.get('at_risk_products', []) %}
+    <tr><td>{{ r.product }}</td><td>{{ r.reason }}</td></tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+
+  <p style="margin-top:10px;"><em>{{ customer_insights.get('key_insight', '') }}</em></p>
+  {% endif %}
+</div>
+
+<!-- Section 4: SWOT -->
+<div class="section">
+  <h2>4. SWOT Analysis</h2>
+  {% if swot %}
+  <div class="swot-grid">
+    <div class="swot-cell strengths">
+      <h3>💪 Strengths</h3>
+      <ul>{% for s in swot.get('strengths', []) %}<li>{{ s }}</li>{% endfor %}</ul>
+    </div>
+    <div class="swot-cell weaknesses">
+      <h3>⚠️ Weaknesses</h3>
+      <ul>{% for w in swot.get('weaknesses', []) %}<li>{{ w }}</li>{% endfor %}</ul>
+    </div>
+    <div class="swot-cell opportunities">
+      <h3>🚀 Opportunities</h3>
+      <ul>{% for o in swot.get('opportunities', []) %}<li>{{ o }}</li>{% endfor %}</ul>
+    </div>
+    <div class="swot-cell threats">
+      <h3>⚡ Threats</h3>
+      <ul>{% for t in swot.get('threats', []) %}<li>{{ t }}</li>{% endfor %}</ul>
+    </div>
+  </div>
+  <p style="margin-top:12px;"><em>{{ swot.get('swot_summary', '') }}</em></p>
+  {% endif %}
+</div>
+
+<!-- Section 5: Feature Prioritization -->
+<div class="section">
+  <h2>5. Feature Prioritization (RICE Framework)</h2>
+  {% if feature_priorities and feature_priorities.get('prioritized_features') %}
+  <table>
+    <tr>
+      <th>Feature</th><th>Category</th><th>Reach</th><th>Impact</th>
+      <th>Confidence</th><th>Effort (wks)</th><th>RICE Score</th>
+    </tr>
+    {% for f in feature_priorities.get('prioritized_features', []) %}
+    <tr>
+      <td>{{ f.feature }}</td>
+      <td>{{ f.category }}</td>
+      <td>{{ f.reach_score }}</td>
+      <td>{{ f.impact_score }}</td>
+      <td>{{ f.confidence_pct }}%</td>
+      <td>{{ f.effort_weeks }}</td>
+      <td>
+        <span class="score-badge {% if f.rice_score > 200 %}score-high{% elif f.rice_score > 100 %}score-med{% else %}score-low{% endif %}">
+          {{ f.rice_score | round(0) | int }}
+        </span>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  {% if feature_priorities.get('quick_wins') %}
+  <h3>Quick Wins</h3>
+  <ul style="padding-left:16px; font-size:10px;">
+    {% for qw in feature_priorities.get('quick_wins', []) %}<li>{{ qw }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+  {% endif %}
+</div>
+
+<!-- Section 6: Opportunity Scoring -->
+<div class="section">
+  <h2>6. Opportunity Scoring</h2>
+  {% if opportunities and opportunities.get('top_opportunities') %}
+  {% for opp in opportunities.get('top_opportunities', []) %}
+  <div class="opp-card">
+    <div class="opp-score">{{ opp.score | round(0) | int }}</div>
+    <div class="opp-details">
+      <div class="name">{{ opp.opportunity }}</div>
+      <div class="meta">
+        {{ opp.category }} · {{ opp.region }}
+        <span class="tag tag-{{ opp.investment_required }}">Investment: {{ opp.investment_required }}</span>
+        <span class="tag tag-{{ opp.expected_return }}">Return: {{ opp.expected_return }}</span>
+      </div>
+      <div style="font-size:10px; margin-top:4px; color:#475569;">{{ opp.rationale }}</div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% if opportunities.get('whitespace_areas') %}
+  <h3>Whitespace Areas</h3>
+  <ul style="padding-left:16px; font-size:10px;">
+    {% for wa in opportunities.get('whitespace_areas', []) %}<li>{{ wa }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+  {% endif %}
+</div>
+
+<!-- Section 7: Strategic Action Plan -->
+<div class="section">
+  <h2>7. Strategic Action Plan</h2>
+
+  <div class="horizon-label">⏱ 90-Day Actions</div>
+  {% for a in action_plan_90 %}
+  <div class="action-row">
+    <div class="action-bullet">{{ loop.index }}</div>
+    <div class="action-content">
+      <strong>{{ a.action }}</strong>
+      <div class="kpi">Owner: {{ a.owner }} &nbsp;|&nbsp; KPI: {{ a.kpi }}</div>
+    </div>
+  </div>
+  {% endfor %}
+
+  <div class="horizon-label" style="margin-top:16px;">📅 6-Month Actions</div>
+  {% for a in action_plan_6m %}
+  <div class="action-row">
+    <div class="action-bullet">{{ loop.index }}</div>
+    <div class="action-content">
+      <strong>{{ a.action }}</strong>
+      <div class="kpi">Owner: {{ a.owner }} &nbsp;|&nbsp; KPI: {{ a.kpi }}</div>
+    </div>
+  </div>
+  {% endfor %}
+
+  <div class="horizon-label" style="margin-top:16px;">🎯 12-Month Actions</div>
+  {% for a in action_plan_12m %}
+  <div class="action-row">
+    <div class="action-bullet">{{ loop.index }}</div>
+    <div class="action-content">
+      <strong>{{ a.action }}</strong>
+      <div class="kpi">Owner: {{ a.owner }} &nbsp;|&nbsp; KPI: {{ a.kpi }}</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Section 8: Product Roadmap -->
+<div class="section">
+  <h2>8. Product Roadmap</h2>
+  {% if product_roadmap %}
+  <table>
+    <tr><th>Quarter</th><th>Product</th><th>Initiative</th><th>Priority</th></tr>
+    {% for item in product_roadmap %}
+    <tr>
+      <td>{{ item.quarter }}</td>
+      <td>{{ item.product }}</td>
+      <td>{{ item.initiative }}</td>
+      <td>
+        <span class="score-badge {% if item.priority == 'P0' %}score-high{% elif item.priority == 'P1' %}score-med{% else %}score-low{% endif %}">
+          {{ item.priority }}
+        </span>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% endif %}
+</div>
+
+<div class="footer-notice">
+  CONFIDENTIAL — For internal use only. Generated by AI-Powered Product Strategy Assistant.
+  This report is based on the data provided and AI analysis. Verify key assumptions before acting.
+</div>
+
+</body>
+</html>

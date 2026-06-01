@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Stop-Process -Id 43120 -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 3; $result = Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue; if \\($result\\) { Write-Host \"Still in use: $\\($result.OwningProcess\\)\" } else { Write-Host \"Port 8000 free\" })",
+      "PowerShell(Stop-Process -Id 31644 -Force -ErrorAction SilentlyContinue; Start-Sleep -Seconds 4; $result = Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue; if \\($result\\) { Write-Host \"Still in use: $\\(\\($result | Select-Object -ExpandProperty OwningProcess | Sort-Object -Unique\\) -join ', '\\)\" } else { Write-Host \"Port 8000 free\" })",
+      "Bash(curl -s -X POST http://localhost:8001/api/chat -H 'Content-Type: application/json' -d '{\"message\":\"What are the top performing products by revenue?\"}' --max-time 120)",
+      "Bash(python -m json.tool)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 8001 -ErrorAction SilentlyContinue | Where-Object {$_.OwningProcess -ne 0} | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; Start-Sleep -Seconds 3; Write-Host \"cleared\")"
+    ]
+  }
+}
