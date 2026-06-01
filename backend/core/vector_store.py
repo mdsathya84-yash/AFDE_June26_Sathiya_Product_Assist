@@ -3,12 +3,15 @@ from dataclasses import dataclass
 from typing import Optional
 
 import chromadb
-from chromadb.utils.embedding_functions import SentenceTransformerEmbeddingFunction
+from chromadb.utils.embedding_functions import DefaultEmbeddingFunction
 from rank_bm25 import BM25Okapi
 
 from backend.core.config import settings
 
 logger = logging.getLogger(__name__)
+
+# Use ChromaDB's built-in ONNX embedding (no PyTorch / sentence-transformers needed).
+# This keeps memory well within Render's free-tier 512 MB limit.
 
 
 @dataclass
@@ -137,9 +140,7 @@ class HybridSearchRetriever:
 class VectorStore:
     def __init__(self):
         self.client = chromadb.PersistentClient(path=settings.CHROMA_PERSIST_DIR)
-        self.embedding_fn = SentenceTransformerEmbeddingFunction(
-            model_name=settings.EMBEDDING_MODEL
-        )
+        self.embedding_fn = DefaultEmbeddingFunction()
         self.collection = self.client.get_or_create_collection(
             name=settings.COLLECTION_NAME,
             embedding_function=self.embedding_fn,

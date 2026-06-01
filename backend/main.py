@@ -34,8 +34,15 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Starting Product Strategy Assistant...")
+    # Keep startup minimal to stay within Render's 512 MB free-tier RAM limit.
+    # Heavy init (ChromaDB, embedding model, LangGraph) is deferred to the first request.
+    logger.info("Application startup complete.")
+    yield
+    logger.info("Shutting down.")
 
+
+async def _lazy_init():
+    """Run once on the first API request: ingest data + compile LangGraph."""
     from backend.core.vector_store import get_vector_store
     from backend.ingestion.ingestor import ingest_csv
     from backend.agents.graph import get_compiled_graph
@@ -48,16 +55,18 @@ async def lifespan(app: FastAPI):
             logger.info("Auto-ingesting sample data...")
             await ingest_csv(csv_path, vs)
             logger.info("Sample data ingested.")
-        else:
-            logger.warning("Sample data CSV not found at %s", csv_path)
-
-    logger.info("Compiling LangGraph...")
     get_compiled_graph()
     logger.info("LangGraph ready.")
 
-    logger.info("Application startup complete.")
-    yield
-    logger.info("Shutting down.")
+
+_initialized = False
+
+
+async def ensure_initialized():
+    global _initialized
+    if not _initialized:
+        _initialized = True
+        await _lazy_init()
 
 
 app = FastAPI(

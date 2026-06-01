@@ -8,6 +8,10 @@ import pandas as pd
 from fastapi import APIRouter, File, HTTPException, UploadFile
 from fastapi.responses import Response, StreamingResponse
 
+async def _init():
+    from backend.main import ensure_initialized
+    await ensure_initialized()
+
 from backend.agents.graph import run_analysis
 from backend.core.vector_store import build_filter, get_vector_store
 from backend.ingestion.ingestor import ingest_csv, ingest_text
@@ -30,6 +34,7 @@ _last_analysis: dict = {}
 
 @router.post("/ingest", response_model=IngestResponse)
 async def ingest_files(files: list[UploadFile] = File(...)):
+    await _init()
     vs = get_vector_store()
     total_chunks = 0
     stats = {}
@@ -72,6 +77,7 @@ async def ingest_files(files: list[UploadFile] = File(...)):
 
 @router.post("/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
+    await _init()
     global _last_analysis
     try:
         filters = None
@@ -112,6 +118,7 @@ async def chat(request: ChatRequest):
 
 @router.post("/analyze")
 async def analyze(request: AnalyzeRequest):
+    await _init()
     global _last_analysis
     try:
         filters = None
@@ -170,6 +177,7 @@ async def get_report(format: str = "pdf"):
 
 @router.get("/dashboard", response_model=DashboardData)
 async def get_dashboard():
+    await _init()
     try:
         csv_path = Path(__file__).parent.parent.parent / "sample_data" / "Sample_Sales_Data.csv"
         if not csv_path.exists():
